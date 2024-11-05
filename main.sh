@@ -161,10 +161,10 @@ install_base() {
 install_moudles() {
   source fail2ban.sh
   install_fail2ban
-  source alist.sh
-  install_alist
   source naive.sh
   install_naive
+  source alist.sh
+  install_alist
   source route.sh
   route_test
 }
