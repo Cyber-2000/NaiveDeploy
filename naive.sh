@@ -3,7 +3,7 @@
 set +e
 
 install_naive(){
-clear
+
 TERM=ansi whiptail --title "安装中" --infobox "安装Naiveproxy" 7 68
 systemctl stop caddy
 wget "https://dl.google.com/go/$(curl https://go.dev/VERSION?m=text -s | head -1).linux-amd64.tar.gz"

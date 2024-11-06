@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-clear
+
 
 set +e
 
@@ -155,7 +155,7 @@ install_base() {
   apt-get update
   apt-get install sudo git curl xz-utils wget apt-transport-https gnupg lsb-release unzip resolvconf ntpdate systemd dbus ca-certificates locales iptables software-properties-common cron e2fsprogs less neofetch -y
   apt-get install bc -y
-  clear
+  
 }
 
 install_moudles() {
@@ -173,11 +173,11 @@ clean_env() {
   cd /root
   cd
   rm -rf /root/*.sh
-  clear
+  
 }
 
 MasterMenu() {
-  Mainmenu=$(whiptail --clear --ok-button "1" --backtitle "Hi" --title "Menu" --menu --nocancel "Welcome" 14 68 5 \
+  Mainmenu=$(whiptail --ok-button "1" --backtitle "Hi" --title "Menu" --menu --nocancel "Welcome" 14 68 5 \
     "Install_standard" "安裝" \
     "Exit" "退出" 3>&1 1>&2 2>&3)
   case $Mainmenu in
@@ -204,11 +204,11 @@ MasterMenu() {
     ;;
   esac
 }
-clear
+
 #sed -i "s/#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/g" /etc/gai.conf
 mkdir /root/.naive/
 curl --ipv4 --retry 3 -s https://ipinfo.io?token=56c375418c62c9 --connect-timeout 5 &>/root/.naive/ip.json
 initialize
 setlanguage
-clear
+
 MasterMenu
