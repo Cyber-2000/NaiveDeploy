@@ -153,7 +153,7 @@ initialize() {
 install_base() {
   set +e
   apt-get update
-  apt-get install sudo git curl xz-utils wget apt-transport-https gnupg lsb-release unzip resolvconf ntpdate systemd dbus ca-certificates locales iptables software-properties-common cron e2fsprogs less neofetch -y
+  apt-get install sudo git curl xz-utils wget apt-transport-https gnupg lsb-release unzip ntpdate systemd dbus ca-certificates locales iptables software-properties-common cron e2fsprogs less neofetch -y
   apt-get install bc -y
   
 }
