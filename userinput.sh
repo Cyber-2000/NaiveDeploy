@@ -14,11 +14,5 @@ userinput_standard() {
     while [[ -z ${password1} ]]; do
         password1=$(whiptail --inputbox --nocancel "Naiveproxy密码" 8 68 --title "密码设置" 3>&1 1>&2 2>&3 | sed 's/ //g')
         n=${#password1}
-      if [[ ${n} > 30 ]] || [[ ${n} == 0 ]] || [[ ${n} -le 3  ]]  ; then
-        password1=$(
-          head /dev/urandom | tr -dc a-z0-9 | head -c 6
-          echo ''
-        )
-      fi
     done
 }
