@@ -14,7 +14,6 @@ go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 cp caddy /usr/bin/
 /usr/bin/caddy version
 setcap cap_net_bind_service=+ep /usr/bin/caddy
-systemctl restart naive
 rm *.linux-amd64.tar.gz
 rm caddy
 rm -rf go
