@@ -63,8 +63,8 @@ echo -e "    \${YELLOW}https://$domain\${NOCOLOR} | ${password1}"
 EOF
 chmod +x /etc/profile.d/mymotd.sh
 echo "" > /etc/motd
-echo "Install complete!"
-whiptail --title "Success" --infobox "安装成功 正在重启" 8 
+clear
+echo "Install complete! Reboot now."
 
 cd $local_folder
 
