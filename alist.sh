@@ -49,8 +49,8 @@ rm tmp.json
 
 cd $local_folder
 
-/opt/alist/alist admin set ${password1} --data /opt/alist/data
-
 systemctl restart alist
+
+/opt/alist/alist admin set ${password1} --data /opt/alist/data
 
 }
