@@ -51,6 +51,11 @@ cd $local_folder
 
 systemctl restart alist
 
-/opt/alist/alist admin set ${password1} --data /opt/alist/data
+sleep 4
 
+cd /opt/alist/
+
+./alist admin set ${password1} --data /opt/alist/data
+
+cd $local_folder
 }
