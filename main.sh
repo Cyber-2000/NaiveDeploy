@@ -165,8 +165,8 @@ install_moudles() {
   install_naive
   source alist.sh
   install_alist
-  source route.sh
-  route_test
+  #source route.sh
+  #route_test
 }
 
 clean_env() {

@@ -13,18 +13,6 @@ Unattended-Upgrade::Remove-Unused-Kernel-Packages "true";
 Unattended-Upgrade::Remove-Unused-Dependencies "true";
 EOF
 
-while [[ -z ${myip} ]]; do
-
-curl --ipv4 --retry 3 https://api-ipv4.ip.sb/geoip -A Mozilla &> /root/.naive//ip2.json
-
-myip="$( jq -r '.ip' "/root/.naive//ip2.json" )"
-mycountry="$( jq -r '.country' "/root/.naive//ip2.json" )"
-mycity="$( jq -r '.city' "/root/.naive//ip.json" )"
-myip_org="$( jq -r '.isp' "/root/.naive//ip2.json" )"
-
-done
-
-clear
 	cat > '/etc/profile.d/mymotd.sh' << EOF
 #!/usr/bin/env bash
 bold=\$(tput bold)
@@ -52,12 +40,11 @@ WHITE='\033[1;37m'
 domain="${domain}"
 password1="${password1}"
 neofetch
-echo -e " --- 欢迎使用VPSToolBox 😀😀😀 --- "
 echo -e " --- \${BLUE}服務狀態(Service Status)\${NOCOLOR} ---"
   if [[ \$(systemctl is-active wg-quick@wgcf.service) == active ]]; then
 echo -e "Warp+ Teams:\t\t 正常运行中"
   fi
-  if [[ \$(systemctl is-active naive) == active ]]; then
+  if [[ \$(systemctl is-active caddy) == active ]]; then
 echo -e "Naiveproxy:\t\t 正常运行中"
   fi
   if [[ \$(systemctl is-active alist) == active ]]; then
@@ -69,15 +56,10 @@ echo -e "Netdata:\t\t 正常运行中"
   if [[ \$(systemctl is-active fail2ban) == active ]]; then
 echo -e "Fail2ban:\t\t 正常运行中"
   fi
-if [[ -d /opt/alist ]]; then
+echo -e " --- \${BLUE}Naiveproxy 链接\${NOCOLOR} ---"
+echo -e "    \${YELLOW}naive+quic://alpha:${password1}@${domain}:443"
 echo -e " --- \${BLUE}Alist 链接\${NOCOLOR} ---"
-echo -e "    \${YELLOW}https://$domain:${trojanport}\${NOCOLOR}"
-cd /opt/alist
-./alist admin
-cd
-fi
-echo "nameserver 1.1.1.1" > /etc/resolv.conf
-echo "nameserver 9.9.9.10" >> /etc/resolv.conf
+echo -e "    \${YELLOW}https://$domain\${NOCOLOR} | ${password1}"
 EOF
 chmod +x /etc/profile.d/mymotd.sh
 echo "" > /etc/motd
