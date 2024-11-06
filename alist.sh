@@ -47,7 +47,7 @@ cat config.json | jq '.tls_insecure_skip_verify = false' &> tmp.json
 cp tmp.json config.json
 rm tmp.json
 
-cd 
+cd $local_folder
 
 /opt/alist/alist admin set ${password1} --data /opt/alist/data
 

@@ -158,17 +158,6 @@ install_base() {
   
 }
 
-install_moudles() {
-  source fail2ban.sh
-  install_fail2ban
-  source naive.sh
-  install_naive
-  source alist.sh
-  install_alist
-  #source route.sh
-  #route_test
-}
-
 MasterMenu() {
   Mainmenu=$(whiptail --ok-button "1" --backtitle "Hi" --title "Menu" --menu --nocancel "Welcome" 14 68 5 \
     "Install_standard" "安裝" \
@@ -185,7 +174,10 @@ MasterMenu() {
     install_base
     source firewall.sh
     openfirewall
-    install_moudles
+    source naive.sh
+    install_naive
+    source alist.sh
+    install_alist
     apt-get install neofetch -y
     cd $local_folder
     source output.sh

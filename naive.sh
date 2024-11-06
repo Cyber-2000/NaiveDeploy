@@ -92,7 +92,7 @@ mkdir /etc/caddy/
 EOF
 cd /etc/caddy/
 caddy fmt --overwrite
-cd
+cd $local_folder
 chmod -R 755 /etc/caddy/
 systemctl daemon-reload
 systemctl restart caddy
