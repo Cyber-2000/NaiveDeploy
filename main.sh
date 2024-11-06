@@ -169,13 +169,6 @@ install_moudles() {
   #route_test
 }
 
-clean_env() {
-  cd /root
-  cd
-  rm -rf /root/*.sh
-  
-}
-
 MasterMenu() {
   Mainmenu=$(whiptail --ok-button "1" --backtitle "Hi" --title "Menu" --menu --nocancel "Welcome" 14 68 5 \
     "Install_standard" "安裝" \
@@ -194,8 +187,8 @@ MasterMenu() {
     echo "nameserver 1.1.1.1" >/etc/resolv.conf
     echo "nameserver 9.9.9.10" >>/etc/resolv.conf
     apt-get install neofetch -y
+    cd $local_folder
     source output.sh
-    clean_env
     prase_output
     exit 0
     ;;
@@ -206,6 +199,9 @@ MasterMenu() {
 }
 
 #sed -i "s/#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/g" /etc/gai.conf
+
+local_folder=$(pwd)
+
 mkdir /root/.naive/
 curl --ipv4 --retry 3 -s https://ipinfo.io?token=56c375418c62c9 --connect-timeout 5 &>/root/.naive/ip.json
 initialize

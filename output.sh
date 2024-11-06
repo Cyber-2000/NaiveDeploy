@@ -64,7 +64,13 @@ EOF
 chmod +x /etc/profile.d/mymotd.sh
 echo "" > /etc/motd
 echo "Install complete!"
-whiptail --title "Success" --infobox "安装成功 正在重启" 8 68
+whiptail --title "Success" --infobox "安装成功 正在重启" 8 
+
+cd $local_folder
+
+cd ..
+
+rm -rf NaiveDeploy
 
 reboot
 }
