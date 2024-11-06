@@ -175,7 +175,9 @@ MasterMenu() {
     "Exit" "退出" 3>&1 1>&2 2>&3)
   case $Mainmenu in
   Install_standard)
-    ## 初始化安装
+    echo "nameserver 1.1.1.1" >/etc/resolv.conf
+    echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
+    chattr +i -f /etc/resolv.conf
     source userinput.sh
     userinput_standard
     source bbr.sh
@@ -184,8 +186,6 @@ MasterMenu() {
     source firewall.sh
     openfirewall
     install_moudles
-    echo "nameserver 1.1.1.1" >/etc/resolv.conf
-    echo "nameserver 9.9.9.10" >>/etc/resolv.conf
     apt-get install neofetch -y
     cd $local_folder
     source output.sh
