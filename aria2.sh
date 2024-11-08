@@ -105,7 +105,7 @@ rpc-allow-origin-all=true
 rpc-listen-all=false
 rpc-secure=false
 rpc-listen-port=6800
-rpc-secret=$ariapasswd
+rpc-secret=$password1
 #Bittorrent Settings######
 follow-torrent=true
 listen-port=$ariaport
