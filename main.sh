@@ -178,6 +178,8 @@ MasterMenu() {
     install_docker
     source peerbanhelper.sh
     install_peerbanhelper
+    source aria2.sh
+    install_aria2
     source naive.sh
     install_naive
     source alist.sh
