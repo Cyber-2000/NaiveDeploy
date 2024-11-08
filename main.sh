@@ -174,6 +174,10 @@ MasterMenu() {
     install_base
     source firewall.sh
     openfirewall
+    source docker.sh
+    install_docker
+    source peerbanhelper.sh
+    install_peerbanhelper
     source naive.sh
     install_naive
     source alist.sh
