@@ -12,13 +12,12 @@ mkdir /etc/pbh/data
   cat > '/etc/pbh/docker-compose.yml' << EOF
 services:
   peerbanhelper:
-    image: "ghostchu/peerbanhelper:v7.1.2"
+    image: "ghostchu/peerbanhelper:latest"
+    network_mode: host
     restart: unless-stopped
     container_name: "peerbanhelper"
     volumes:
       - /etc/pbh/data:/app/data
-    ports:
-      - "127.0.0.1:9898:9898"
     environment:
       - PUID=0
       - PGID=0
@@ -27,6 +26,23 @@ EOF
 
 cd /etc/pbh
 docker-compose up -d
+
+apt-get install yq -y
+
+sleep 10
+
+cd /etc/pbh/data/config
+
+cat config.yml | yq '.server.address = "127.0.0.1"' -y &> tmp.yml
+cp tmp.yml config.yml
+rm tmp.yml
+
+cat config.yml | yq '."server"."token" = "'"$password1"'"' -y &> tmp.yml
+cp tmp.yml config.yml
+rm tmp.yml
+
+cd cd /etc/pbh
+docker-compose restart -d
 
 cd $local_folder
 }
