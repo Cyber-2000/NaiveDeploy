@@ -11,28 +11,11 @@ install_alist(){
         curl -fsSL "https://alist.nn.ci/v3.sh" | bash -s install
     fi
 
-  cat > '/etc/systemd/system/alist.service' << EOF
-[Unit]
-Description=Alist service
-Wants=network.target
-After=network.target network.service
-
-[Service]
-Type=simple
-WorkingDirectory=/opt/alist
-ExecStart=/opt/alist/alist server
-KillMode=process
-LimitNOFILE=infinity
-RestartSec=3s
-Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-systemctl daemon-reload
 systemctl enable alist
+systemctl status alist
 systemctl restart alist
+
+sleep 10
 
 cd /opt/alist/data
 cat config.json | jq '.scheme.address = "127.0.0.1"' &> tmp.json
@@ -51,7 +34,7 @@ cd $local_folder
 
 systemctl restart alist
 
-sleep 4
+sleep 10
 
 cd /opt/alist/
 
