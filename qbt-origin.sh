@@ -37,6 +37,7 @@ WantedBy=multi-user.target
 EOF
 systemctl daemon-reload
 systemctl enable qbittorrent.service
+mkdir /etc/qbt
 mkdir /etc/qbt/qBittorrent/
 mkdir /etc/qbt/qBittorrent/downloads/
 mkdir /etc/qbt/qBittorrent/data/
