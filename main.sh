@@ -177,8 +177,8 @@ MasterMenu() {
     install_peerbanhelper
     source aria2.sh
     install_aria2
-    source qbt-origin.sh
-    install_qbt_o
+    source qbt.sh
+    install_qbt
     source alist.sh
     install_alist
     apt-get install neofetch -y
