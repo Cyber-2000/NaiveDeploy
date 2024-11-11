@@ -180,6 +180,8 @@ MasterMenu() {
     install_peerbanhelper
     source aria2.sh
     install_aria2
+    source qbt-origin.sh
+    install_qbt_o
     source naive.sh
     install_naive
     source alist.sh
