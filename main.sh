@@ -159,8 +159,34 @@ install_base() {
 }
 
 MasterMenu() {
+    chattr -i -f /etc/resolv.conf
     echo "nameserver 1.1.1.1" >/etc/resolv.conf
     echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
+    cfdver1=$(curl -s "https://api.github.com/repos/cloudflare/cloudflared/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    curl -LO https://github.com/cloudflare/cloudflared/releases/download/${cfdver1}/cloudflared-linux-amd64.deb
+    dpkg -i cloudflared*.deb
+    rm cloudflared*.deb
+  cat > '/etc/systemd/system/cloudflared-proxy-dns.service' << EOF
+[Unit]
+Description=DNS over HTTPS (DOH) proxy client
+Wants=network-online.target nss-lookup.target
+Before=nss-lookup.target
+
+[Service]
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE
+ExecStart=/usr/local/bin/cloudflared proxy-dns
+DynamicUser=yes
+LimitNOFILE=infinity
+RestartSec=3s
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+    systemctl daemon-reload
+    systemctl enable cloudflared-proxy-dns --now
+    echo "nameserver 127.0.0.1" >/etc/resolv.conf
     chattr +i -f /etc/resolv.conf
     source userinput.sh
     userinput_standard
