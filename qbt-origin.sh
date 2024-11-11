@@ -3,7 +3,7 @@
 set +e
 
 install_qbt_o(){
-TERM=ansi whiptail --title "安装中" --infobox "安装Qbt原版中..." 7 68
+TERM=ansi whiptail --title "安装中" --infobox "安装Qbt中..." 7 68
 if [[ ${dist} == debian ]]; then
   apt-get update
   apt-get install qbittorrent-nox -y
