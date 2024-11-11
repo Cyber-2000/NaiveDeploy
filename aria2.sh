@@ -125,7 +125,6 @@ bt-max-open-files=1000000
 bt-max-peers=0
 bt-tracker=$trackers_list
 EOF
-clear
 touch /var/log/aria2.log
 touch /usr/local/bin/aria2.session
 systemctl daemon-reload
