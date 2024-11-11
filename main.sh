@@ -164,6 +164,8 @@ MasterMenu() {
     chattr +i -f /etc/resolv.conf
     source userinput.sh
     userinput_standard
+    apt update
+    apt upgrade -y
     source bbr.sh
     install_bbr
     install_base
