@@ -89,6 +89,10 @@ mkdir /etc/caddy/
                 handle_path /${password1}_qbt/* {
                         reverse_proxy http://127.0.0.1:8080
                 }
+                redir /${password1}_pbh /${password1}_pbh/
+                handle_path /${password1}_pbh/* {
+                        reverse_proxy http://127.0.0.1:9898
+                }
                 reverse_proxy http://127.0.0.1:5244 {
                 }
         }
