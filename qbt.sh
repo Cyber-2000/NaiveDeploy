@@ -17,7 +17,7 @@ fi
   cat > '/etc/systemd/system/qbittorrent.service' << EOF
 [Unit]
 Description=qBittorrent Daemon Service
-Documentation=https://github.com/c0re100/qBittorrent-Enhanced-Edition
+Documentation=https://github.com/qbittorrent/qBittorrent
 Wants=network-online.target
 After=network-online.target nss-lookup.target
 
