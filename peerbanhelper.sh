@@ -10,7 +10,6 @@ mkdir /etc/pbh
 mkdir /etc/pbh/data
 
   cat > '/etc/pbh/docker-compose.yml' << EOF
-version: "3.9"
 services:
   peerbanhelper:
     image: "ghostchu/peerbanhelper:v7.1.2"
