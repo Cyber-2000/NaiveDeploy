@@ -85,6 +85,10 @@ mkdir /etc/caddy/
                         -Server
                 }
                 encode zstd gzip
+                redir /${password1}_qbt /${password1}_qbt/
+                handle_path /${password1}_qbt/* {
+                        reverse_proxy http://127.0.0.1:8080
+                }
                 reverse_proxy http://127.0.0.1:5244 {
                 }
         }
