@@ -50,6 +50,25 @@ cat config.yml | yq '."server"."token" = "'"$password1"'"' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
 
+cat config.yml | grep qbittorrent
+if [ $? != 0 ];then
+echo 1
+echo "client:" >>config.yml
+echo "  local:" >>config.yml
+echo "    type: qbittorrent" >>config.yml
+echo "    endpoint: http://127.0.0.1:8080" >>config.yml
+echo "    basic-auth:" >>config.yml
+echo "      user: ''" >>config.yml
+echo "      pass: ''" >>config.yml
+echo "    http-version: HTTP_2" >>config.yml
+echo "    increment-ban: true" >>config.yml
+echo "    use-shadow-ban: false" >>config.yml
+echo "    verify-ssl: true" >>config.yml
+echo "    ignore-private: false" >>config.yml
+else
+echo 0
+fi
+
 cd /etc/pbh
 docker-compose restart
 
