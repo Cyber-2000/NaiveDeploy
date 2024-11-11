@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-## Alist模组
-
 set +e
 
 install_alist(){
@@ -13,7 +11,6 @@ install_alist(){
 
 systemctl enable alist
 systemctl status alist
-systemctl restart alist
 
 sleep 10
 
