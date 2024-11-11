@@ -37,6 +37,10 @@ cat config.yml | yq '.server.address = "127.0.0.1"' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
 
+cat config.yml | yq '.proxy.setting = 0' -y &> tmp.yml
+cp tmp.yml config.yml
+rm tmp.yml
+
 cat config.yml | yq '."server"."token" = "'"$password1"'"' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
