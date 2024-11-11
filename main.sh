@@ -159,11 +159,6 @@ install_base() {
 }
 
 MasterMenu() {
-  Mainmenu=$(whiptail --ok-button "1" --backtitle "Hi" --title "Menu" --menu --nocancel "Welcome" 14 68 5 \
-    "Install_standard" "安裝" \
-    "Exit" "退出" 3>&1 1>&2 2>&3)
-  case $Mainmenu in
-  Install_standard)
     echo "nameserver 1.1.1.1" >/etc/resolv.conf
     echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
     chattr +i -f /etc/resolv.conf
@@ -191,11 +186,6 @@ MasterMenu() {
     source output.sh
     prase_output
     exit 0
-    ;;
-  Exit)
-    exit 0
-    ;;
-  esac
 }
 
 #sed -i "s/#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/g" /etc/gai.conf
