@@ -174,6 +174,8 @@ MasterMenu() {
     install_base
     source firewall.sh
     openfirewall
+    source naive.sh
+    install_naive
     source docker.sh
     install_docker
     source peerbanhelper.sh
@@ -182,8 +184,6 @@ MasterMenu() {
     install_aria2
     source qbt-origin.sh
     install_qbt_o
-    source naive.sh
-    install_naive
     source alist.sh
     install_alist
     apt-get install neofetch -y
