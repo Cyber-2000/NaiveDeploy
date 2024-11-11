@@ -10,7 +10,6 @@ install_alist(){
     fi
 
 systemctl enable alist
-systemctl status alist
 
 sleep 10
 
