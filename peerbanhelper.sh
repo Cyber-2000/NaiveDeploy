@@ -51,7 +51,7 @@ cp tmp.yml config.yml
 rm tmp.yml
 
 cd /etc/pbh
-docker-compose restart -d
+docker-compose restart
 
 cd $local_folder
 }
