@@ -50,7 +50,7 @@ cat config.yml | yq '."server"."token" = "'"$password1"'"' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
 
-cd cd /etc/pbh
+cd /etc/pbh
 docker-compose restart -d
 
 cd $local_folder
