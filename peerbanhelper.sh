@@ -22,6 +22,11 @@ services:
       - PUID=0
       - PGID=0
       - TZ=UTC
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
 EOF
 
 cd /etc/pbh
