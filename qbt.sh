@@ -6,7 +6,12 @@ install_qbt(){
 TERM=ansi whiptail --title "安装中" --infobox "安装Qbt中..." 7 68
 if [[ ${dist} == debian ]]; then
   apt-get update
-  apt-get install qbittorrent-nox -y
+  # apt-get install qbittorrent-nox -y
+  qbtver1=$(curl -s "https://api.github.com/repos/userdocs/qbittorrent-nox-static/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/' | cut -c1-13)
+  curl -LO https://github.com/userdocs/qbittorrent-nox-static/releases/download/${qbtver1}_v1.2.19/x86_64-qbittorrent-nox
+  cp x86_64-qbittorrent-nox /usr/bin/qbittorrent-nox
+  chmod +x /usr/bin/qbittorrent-nox
+  rm x86_64-qbittorrent-nox
  elif [[ ${dist} == ubuntu ]]; then
   add-apt-repository ppa:qbittorrent-team/qbittorrent-stable -y
   apt-get install qbittorrent-nox -y
@@ -25,7 +30,7 @@ After=network-online.target nss-lookup.target
 Type=simple
 User=root
 RemainAfterExit=yes
-ExecStart=/usr/bin/qbittorrent-nox --profile=/etc/qbt
+ExecStart=/usr/bin/qbittorrent-nox --profile=/etc/qbt --confirm-legal-notice
 TimeoutStopSec=infinity
 LimitNOFILE=infinity
 Restart=always
@@ -42,19 +47,33 @@ mkdir /etc/qbt/qBittorrent/downloads/
 mkdir /etc/qbt/qBittorrent/data/
 mkdir /etc/qbt/qBittorrent/data/GeoIP/
 chmod 755 /etc/qbt
-systemctl restart qbittorrent.service
 
+cd /var/log/journal/
+cd *
+echo '' > system.journal
+systemctl restart qbittorrent.service
+sleep 10
+
+qbtpass=$(journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200)
+journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200
+
+if [ $? != 0];then
+journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200
+while [[ -z $qbtpass]];do
+qbtpass=$(journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200)
+done
+fi
 cpu_thread_count=$(nproc --all)
 io_thread=$((${cpu_thread_count}*4))
 
 sleep 3
-qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data 'username=admin&password=adminadmin' http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
+qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 
 if [[ -f $qbtcookie  ]]; then
 echo success
 else
 while [[ -z $qbtcookie  ]]; do
-qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data 'username=admin&password=adminadmin' http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
+qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 done
 fi
 
@@ -69,7 +88,7 @@ fi
 
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"save_path":"/etc/qbt/qBittorrent/downloads/"}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"web_ui_address":"127.0.0.1"}'
-curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d "json={"web_ui_password":"${password1}"}"
+#curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d "json={"web_ui_password":"${password1}"}"
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"idn_support_enabled":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"announce_to_all_trackers":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"bypass_local_auth":true}'

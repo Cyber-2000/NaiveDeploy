@@ -68,7 +68,7 @@ echo "    http-version: HTTP_2" >>config.yml
 echo "    increment-ban: true" >>config.yml
 echo "    use-shadow-ban: false" >>config.yml
 echo "    verify-ssl: true" >>config.yml
-echo "    ignore-private: false" >>config.yml
+echo "    ignore-private: true" >>config.yml
 else
 echo 0
 fi
