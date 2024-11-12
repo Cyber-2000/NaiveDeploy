@@ -8,19 +8,15 @@ install_docker(){
 TERM=ansi whiptail --title "安装中" --infobox "安装Docker中..." 7 68
 colorEcho ${INFO} "安装Docker(Install Docker ing)"
 sudo apt-get update
-sudo apt-get install ca-certificates curl -y
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
 if [[ ${dist} == debian ]]; then
   apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
-  #curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
   add-apt-repository --yes "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
   apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 elif [[ ${dist} == ubuntu ]]; then
   apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common -y
-  #curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   add-apt-repository --yes "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
   apt-get update
   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
