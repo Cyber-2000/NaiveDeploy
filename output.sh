@@ -64,13 +64,13 @@ password1="${password1}"
 neofetch
 echo -e " --- \${BLUE}服務狀態(Service Status)\${NOCOLOR} ---"
   if [[ \$(systemctl is-active cloudflared-proxy-dns) == active ]]; then
-echo -e "Cloudflared DOH:\t\t 正常运行中"
+echo -e "Cloudflared DOH:\t 正常运行中"
   fi
   if [[ \$(systemctl is-active caddy) == active ]]; then
 echo -e "Naiveproxy:\t\t 正常运行中"
   fi
   if [[ \$(systemctl is-active qbittorrent) == active ]]; then
-echo -e "Qbittorrent:\t\t\t 正常运行中"
+echo -e "Qbittorrent:\t\t 正常运行中"
   fi
   if [[ \$(systemctl is-active aria2) == active ]]; then
 echo -e "Aria2:\t\t\t 正常运行中"
