@@ -4,6 +4,13 @@ apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsec
 
 Debian or Ubuntu only.
 
+System requirement(minimal):
+
+1. 1 CPU thread (2.7 Ghz+)
+2. 1 GB RAM
+3. 20 GB DISK SPACE (SSD only)
+4. 1 IPv4 address (80 & 443 port must available)
+
 Run as root.
 
 Run in a vps , do not use host or production machine unless you know what you are doing.
