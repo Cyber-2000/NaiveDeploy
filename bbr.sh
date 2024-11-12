@@ -80,7 +80,7 @@ net.ipv4.tcp_orphan_retries = 1
 net.ipv4.tcp_max_orphans = 100
 net.ipv4.tcp_retries2 = 1
 vm.swappiness = 1
-vm.overcommit_memory = 1
+vm.overcommit_memory = 0
 kernel.pid_max=64000
 ## Enable bbr
 net.core.default_qdisc = cake
