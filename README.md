@@ -10,12 +10,12 @@ Run in a vps , do not use host or production machine unless you know what you ar
 
 Contains following system components:
 
-1.Naiveproxy(Caddy version) 
-2.Alist 
-3.Qbittorrent[with Peerbanhelper(Docker version)] 
-4.Aria2 
-5.Cloudflared DOH Client
-6.BBR TCP Optimization
+1. Naiveproxy(Caddy version) 
+2. Alist 
+3. Qbittorrent[with Peerbanhelper(Docker version)] 
+4. Aria2 
+5. Cloudflared DOH Client
+6. BBR TCP Optimization
 
 All in one script, no manual config required.
 
