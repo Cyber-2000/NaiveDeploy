@@ -4,12 +4,15 @@ apt -o Acquire::AllowInsecureRepositories=true -o Acquire::AllowDowngradeToInsec
 
 Debian or Ubuntu only.
 
+Warning: Naiveproxy does not support cloudflare CDN , use at caution.
+
 System requirement(minimal):
 
 1. 1 CPU thread (2.7 Ghz+)
 2. 1 GB RAM
 3. 20 GB DISK SPACE (SSD only)
 4. 1 IPv4 address (80 & 443 port must available)
+5. 1 domain name (resolved to current IPv4 address)
 
 Run as root.
 
