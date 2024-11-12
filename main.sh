@@ -175,7 +175,7 @@ Before=nss-lookup.target
 [Service]
 AmbientCapabilities=CAP_NET_BIND_SERVICE
 CapabilityBoundingSet=CAP_NET_BIND_SERVICE
-ExecStart=/usr/local/bin/cloudflared proxy-dns
+ExecStart=/usr/local/bin/cloudflared proxy-dns --max-upstream-conns 0
 DynamicUser=yes
 LimitNOFILE=infinity
 RestartSec=3s
@@ -188,6 +188,12 @@ EOF
     systemctl enable cloudflared-proxy-dns --now
     echo "nameserver 127.0.0.1" >/etc/resolv.conf
     chattr +i -f /etc/resolv.conf
+    mkdir -p /etc/systemd/resolved.conf.d/
+  cat > '/etc/systemd/resolved.conf.d/disable-stub.conf' << EOF
+[Resolve]
+DNSStubListener=no
+EOF
+    systemctl disable systemd-resolved.service --now
     source userinput.sh
     userinput_standard
     apt update
@@ -224,5 +230,4 @@ mkdir /root/.naive/
 curl --ipv4 --retry 3 -s https://ipinfo.io?token=56c375418c62c9 --connect-timeout 5 &>/root/.naive/ip.json
 initialize
 setlanguage
-
 MasterMenu
