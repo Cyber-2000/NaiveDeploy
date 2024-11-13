@@ -97,7 +97,6 @@ echo -e "    \${YELLOW}https://$domain/${password1}_pbh/\${NOCOLOR}"
 EOF
 chmod +x /etc/profile.d/mymotd.sh
 echo "" > /etc/motd
-echo "Install complete! Reboot now."
 
 cd $local_folder
 
