@@ -49,13 +49,13 @@ chmod 755 /etc/qbt
 systemctl restart qbittorrent.service
 sleep 10
 
-qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200)
-journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200
+qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }')
+journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }'
 
 if [ $? != 0];then
-journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200
+journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }'
 while [[ -z $qbtpass ]]; do
-qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200)
+qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }')
 done
 fi
 cpu_thread_count=$(nproc --all)
