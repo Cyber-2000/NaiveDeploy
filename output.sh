@@ -89,7 +89,7 @@ echo -e "    \${YELLOW}naive+quic://alpha:${password1}@${domain}:443"
 echo -e " --- \${BLUE}Alist 链接\${NOCOLOR} ---"
 echo -e "    \${YELLOW}https://$domain\${NOCOLOR} | ${password1}"
 echo -e " --- \${BLUE}Qbittorrent 链接\${NOCOLOR} ---"
-echo -e "    \${YELLOW}https://$domain/${password1}_qbt/\${NOCOLOR} | admin | ${qbtpass}"
+echo -e "    \${YELLOW}https://$domain/${password1}_qbt/\${NOCOLOR}"
 echo -e " --- \${BLUE}PeerBanHelper 链接\${NOCOLOR} ---"
 echo -e "    \${YELLOW}https://$domain/${password1}_pbh/\${NOCOLOR}"
 EOF
