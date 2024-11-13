@@ -29,7 +29,6 @@ After=network-online.target nss-lookup.target
 [Service]
 Type=simple
 User=root
-RemainAfterExit=yes
 ExecStart=/usr/bin/qbittorrent-nox --profile=/etc/qbt --confirm-legal-notice
 TimeoutStopSec=infinity
 LimitNOFILE=infinity

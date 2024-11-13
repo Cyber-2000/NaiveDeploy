@@ -8,6 +8,8 @@ cd $local_folder
 
 mkdir /etc/pbh
 mkdir /etc/pbh/data
+mkdir /etc/speed
+mkdir /etc/speed/data
 
   cat > '/etc/pbh/docker-compose.yml' << EOF
 services:
@@ -22,6 +24,26 @@ services:
       - PUID=0
       - PGID=0
       - TZ=UTC
+  speedtest:
+    container_name: speedtest
+    image: ghcr.io/librespeed/speedtest:latest
+    restart: always
+    volumes:
+      - /etc/speed/data:/database
+    environment:
+      MODE: standalone
+      TITLE: "NaiveSpeed"
+      TELEMETRY: "true"
+      #ENABLE_ID_OBFUSCATION: "false"
+      #REDACT_IP_ADDRESSES: "false"
+      PASSWORD: "123456"
+      EMAIL: "example@example.com"
+      #DISABLE_IPINFO: "false"
+      IPINFO_APIKEY: "56c375418c62c9"
+      DISTANCE: "km"
+      #WEBPORT: 80
+    ports:
+      - "127.0.0.1:6666:80" # webport mapping (host:container)
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
