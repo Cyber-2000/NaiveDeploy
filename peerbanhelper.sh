@@ -11,7 +11,7 @@ mkdir /etc/pbh/data
 mkdir /etc/speed
 mkdir /etc/speed/data
 
-  cat > '/etc/pbh/docker-compose.yml' << EOF
+  cat > "/etc/pbh/docker-compose.yml" << EOF
 services:
   peerbanhelper:
     image: "ghostchu/peerbanhelper:latest"
