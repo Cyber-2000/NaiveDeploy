@@ -46,20 +46,16 @@ mkdir /etc/qbt/qBittorrent/downloads/
 mkdir /etc/qbt/qBittorrent/data/
 mkdir /etc/qbt/qBittorrent/data/GeoIP/
 chmod 755 /etc/qbt
-
-cd /var/log/journal/
-cd *
-echo '' > system.journal
 systemctl restart qbittorrent.service
 sleep 10
 
-qbtpass=$(journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200)
-journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200
+qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200)
+journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200
 
 if [ $? != 0];then
-journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200
-while [[ -z $qbtpass]];do
-qbtpass=$(journalctl -eu qbittorrent | grep 'A temporary password is provided for this session' | cut -c164-200)
+journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200
+while [[ -z $qbtpass ]]; do
+qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | cut -c147-200)
 done
 fi
 cpu_thread_count=$(nproc --all)
