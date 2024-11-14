@@ -55,6 +55,13 @@ mkdir /etc/caddy/
 
 {
         order forward_proxy before route
+        log default {
+                output file /etc/caddy/caddy.log {
+                }
+
+                format json
+                include http.log.access admin.api
+        }
 }
 
 :80 {
