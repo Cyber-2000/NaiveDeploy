@@ -49,28 +49,20 @@ chmod 755 /etc/qbt
 systemctl restart qbittorrent.service
 sleep 10
 
-qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }')
-journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }'
+systemctl restart qbittorrent.service
+sleep 10
 
-if [ $? != 0];then
-journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }'
 while [[ -z $qbtpass ]]; do
-qbtpass=$(journalctl -eu qbittorrent | grep 'password is provided for this session' | awk '{ print $21 }')
+qbtpass=$(journalctl -eu qbittorrent -n 7 | grep 'password is provided for this session' | awk '{ print $21 }')
 done
-fi
 cpu_thread_count=$(nproc --all)
 io_thread=$((${cpu_thread_count}*4))
 
 sleep 3
-qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 
-if [[ -f $qbtcookie  ]]; then
-echo success
-else
 while [[ -z $qbtcookie  ]]; do
 qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 done
-fi
 
 # curl http://127.0.0.1:8080/api/v2/app/setPreferences?json=%7B%22encryption%22:1%7D  --cookie "${qbtcookie}"
 #curl http://localhost:8080/api/v2/app/version  --cookie "${qbtcookie}"
