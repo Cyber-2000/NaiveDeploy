@@ -70,6 +70,10 @@ cat config.yml | yq '.proxy.setting = 0' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
 
+cat config.yml | yq '."lookup"."dns-reverse-lookup" = true' -y &> tmp.yml
+cp tmp.yml config.yml
+rm tmp.yml
+
 cat config.yml | yq '."pbh-plus-key" = "SXXuMG2ZsxIhai1HK6IX97G5sXxHDQMBMyNzgOcSux6lVI3+pLPqAaQCbM9GnM6YsgfjmjYXMnO+x7cnkklGOGaip7/ZlEoirMb6PRohNKtNV88NDhyWexFvVseKHcU8qT3e7MQJBZeCoRTbhWL25jLoKPDhFA5YSWLTZJBSJAs/M8t8+52VJWx7ZhlIZk0yQ1qn5UuvNZMAz4I+6fc3YtLPVg7XwHc6T6Ih7KcQvNaa9V64AcJ/c5MsQf2lBYc4dWgO3HWpVXaMkHWE0TDi83qt60E/AXBfCPE2umjU6Rm9MwJxpC8eb1eAjrETfz7gKqixVTDzoRgwSm5JSlzFmy42jk8cRPbIAbqiEWlVECU0YIkUD18znM6/yezcQVKJa+pynHCpnCVx1Lgy2sh320CZfxZfz9fvFIVparSJgcrB/ep85OuYz5QL4LnzrYi5zD+38NpfHUw6iEMdGD5I/Fw0Ah6Wic3IRwiC/i7RIVXTL1vGxkGmcZDImuCoH1d3"' -y &> tmp.yml
 cp tmp.yml config.yml
 rm tmp.yml
