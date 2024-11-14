@@ -79,7 +79,6 @@ mkdir /etc/caddy/
                         # disable clients from sniffing the media type
                         X-Content-Type-Options nosniff
                         # clickjacking protection
-                        X-Frame-Options DENY
                         Referrer-Policy no-referrer
 
                         -Server
