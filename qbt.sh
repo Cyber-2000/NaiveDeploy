@@ -64,12 +64,9 @@ while [[ -z $qbtcookie  ]]; do
 qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 done
 
-# curl http://127.0.0.1:8080/api/v2/app/setPreferences?json=%7B%22encryption%22:1%7D  --cookie "${qbtcookie}"
-#curl http://localhost:8080/api/v2/app/version  --cookie "${qbtcookie}"
 #curl http://localhost:8080/api/v2/app/preferences  --cookie "${qbtcookie}" | jq
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22customize_trackers_list_url%22:%22https:%2f%2ftrackerslist.com%2fall.txt%22%7D  --cookie "${qbtcookie}"
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22auto_update_trackers_enabled%22:true%7D  --cookie "${qbtcookie}"
-# curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22add_trackers_enabled%22:true%7D  --cookie "${qbtcookie}"
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22alternative_webui_enabled%22:false%7D  --cookie "${qbtcookie}"
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22alternative_webui_path%22:%22%2fusr%2fshare%2fnginx%2fqBittorrent%2fweb%2f%22%7D  --cookie "${qbtcookie}"
 
