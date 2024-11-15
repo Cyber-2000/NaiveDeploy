@@ -22,7 +22,7 @@ Contains following system components:
 
 1. Naiveproxy(Caddy version) 
 2. Alist 
-3. Qbittorrent[with Peerbanhelper(Docker version)] 
+3. Qbittorrent[with Peerbanhelper(Docker version) && I2pd] 
 4. Aria2 
 5. Cloudflared DOH Client
 6. LibreSpeed
