@@ -12,10 +12,6 @@ chmod -R 755 /etc/pbh
 mkdir /etc/speed
 mkdir /etc/speed/data
 chmod -R 755 /etc/speed
-mkdir /etc/i2pd
-mkdir /etc/i2pd/data
-mkdir /etc/i2pd/i2pd_certificates
-chmod -R 755 /etc/i2pd
 
   cat > "/etc/pbh/docker-compose.yml" << EOF
 services:
@@ -52,18 +48,6 @@ services:
       #WEBPORT: 80
     ports:
       - "127.0.0.1:6666:80" # webport mapping (host:container)
-  i2pd:
-    container_name: i2pd2
-    image: purplei2p/i2pd
-    #optional
-    entrypoint: ["./entrypoint.sh", "--loglevel error"]
-    ports:
-      - 127.0.0.1:7656:7656
-      - 127.0.0.1:7070:7070
-      - 127.0.0.1:4444:4444
-    volumes:
-      - /etc/i2pd/data:/home/i2pd/data                 # make sure data directory and it's contents are owned by 100:65533
-      - /etc/i2pd/i2pd_certificates:/i2pd_certificates # make sure i2pd_certificates is owned by root:root and 755 permissions on the directory
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
