@@ -64,7 +64,7 @@ while [[ -z $qbtcookie  ]]; do
 qbtcookie=$(curl -i --header 'Referer: http://localhost:8080' --data "username=admin&password=${qbtpass}" http://localhost:8080/api/v2/auth/login | grep set-cookie | cut -c13-48)
 done
 
-#curl http://localhost:8080/api/v2/app/preferences  --cookie "${qbtcookie}" | jq
+# curl http://localhost:8080/api/v2/app/preferences  --cookie "${qbtcookie}" | jq
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22customize_trackers_list_url%22:%22https:%2f%2ftrackerslist.com%2fhttp.txt%22%7D  --cookie "${qbtcookie}"
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22auto_update_trackers_enabled%22:true%7D  --cookie "${qbtcookie}"
 # curl http://localhost:8080/api/v2/app/setPreferences?json=%7B%22alternative_webui_enabled%22:false%7D  --cookie "${qbtcookie}"
@@ -87,6 +87,7 @@ curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"i2p_enabled":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"i2p_mixed_mode":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"encryption":1}'
+curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"bittorrent_protocol":1}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"peer_tos":0}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"socket_backlog_size":30000}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"file_pool_size":65535}'
