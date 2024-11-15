@@ -4,6 +4,20 @@ set +e
 
 install_qbt(){
 TERM=ansi whiptail --title "安装中" --infobox "安装Qbt中..." 7 68
+
+mkdir /etc/i2pd
+mkdir /etc/i2pd/data
+chmod -R 755 /etc/i2pd
+chown -R 100:65533 /etc/i2pd/data
+
+wget -q -O - https://repo.i2pd.xyz/.help/add_repo | sudo bash -s -
+apt-get update
+apt-get install i2pd -y
+
+sed -i 's/false/true/g' /etc/i2pd/i2pd.conf
+
+systemctl restart i2pd
+
 if [[ ${dist} == debian ]]; then
   apt-get update
   # apt-get install qbittorrent-nox -y
@@ -98,17 +112,4 @@ curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"limit_lan_peers":false}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"web_ui_csrf_protection_enabled":false}'
 systemctl restart qbittorrent.service
-
-mkdir /etc/i2pd
-mkdir /etc/i2pd/data
-chmod -R 755 /etc/i2pd
-chown -R 100:65533 /etc/i2pd/data
-
-wget -q -O - https://repo.i2pd.xyz/.help/add_repo | sudo bash -s -
-apt-get update
-apt-get install i2pd -y
-
-sed -i 's/false/true/g' /etc/i2pd/i2pd.conf
-
-systemctl restart i2pd
 }
