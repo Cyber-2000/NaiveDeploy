@@ -100,9 +100,12 @@ curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"apply_ip_filter_to_trackers":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"i2p_enabled":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"i2p_mixed_mode":true}'
+curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"limit_tcp_overhead":true}'
+curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"rss_processing_enabled":true}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"encryption":1}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"bittorrent_protocol":1}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"peer_tos":0}'
+curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d "json={"async_io_threads":${io_thread}}"
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"socket_backlog_size":30000}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"file_pool_size":65535}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"max_connec":-1}'
@@ -111,5 +114,6 @@ curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"max_connec_per_torrent":-1}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"limit_lan_peers":false}'
 curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"web_ui_csrf_protection_enabled":false}'
+curl http://localhost:8080/api/v2/app/setPreferences  --cookie "${qbtcookie}" -v -d 'json={"upnp":false}'
 systemctl restart qbittorrent.service
 }
