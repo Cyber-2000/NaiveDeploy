@@ -12,6 +12,13 @@ userinput_standard() {
     else
       domain=""
     fi
+    validate="^([a-zA-Z0-9][a-zA-Z0-9-]{0,61}[a-zA-Z0-9]\.)+[a-zA-Z]{2,}$"
+    if [[ "$domain" =~ $validate ]]; then
+      echo "Valid $domain name."
+    else
+      echo "Not valid $domain name."
+      domain=""
+    fi
   done
   
   rm -rf /etc/dhcp/dhclient.d/google_hostname.sh
