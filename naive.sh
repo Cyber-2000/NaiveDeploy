@@ -60,7 +60,6 @@ mkdir /etc/caddy/
                 }
 
                 format json
-                include http.log.access admin.api
         }
 }
 
