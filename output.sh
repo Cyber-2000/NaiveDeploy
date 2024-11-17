@@ -94,6 +94,8 @@ echo -e " --- \${BLUE}Qbittorrent 链接\${NOCOLOR} ---"
 echo -e "    \${YELLOW}https://$domain/${password1}_qbt/\${NOCOLOR}"
 echo -e " --- \${BLUE}PeerBanHelper 链接\${NOCOLOR} ---"
 echo -e "    \${YELLOW}https://$domain/${password1}_pbh/\${NOCOLOR}"
+echo -e " --- \${BLUE}I2pd 链接\${NOCOLOR} ---"
+echo -e "    \${YELLOW}https://$domain/${password1}_i2pd/\${NOCOLOR}"
 EOF
 chmod +x /etc/profile.d/mymotd.sh
 echo "" > /etc/motd
