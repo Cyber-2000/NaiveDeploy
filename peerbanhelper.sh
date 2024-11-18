@@ -15,6 +15,9 @@ chmod -R 755 /etc/speed
 mkdir /etc/sabnzbd
 mkdir /etc/sabnzbd/data
 chmod -R 755 /etc/sabnzbd
+sed -i "s/port = 8080/port = 3511/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/host = ::/host = 127.0.0.1/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/url_base = \/sabnzbd/url_base = \/${password1}_sabnzbd/g" /etc/sabnzbd/data/sabnzbd.ini
 
   cat > "/etc/pbh/docker-compose.yml" << EOF
 services:
@@ -53,6 +56,7 @@ services:
       - "127.0.0.1:6666:80" # webport mapping (host:container)
   sabnzbd:
     image: lscr.io/linuxserver/sabnzbd:latest
+    network_mode: host
     container_name: sabnzbd
     environment:
       - PUID=0
@@ -60,8 +64,8 @@ services:
       - TZ=UTC
     volumes:
       - /etc/sabnzbd/data:/config
-    ports:
-      - "127.0.0.1:3511:8080"
+    # ports:
+    #   - "127.0.0.1:3511:8080"
     restart: always
   autoheal:
     image: willfarrell/autoheal
