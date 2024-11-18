@@ -17,14 +17,6 @@ chmod -R 755 /etc/speed
 mkdir /etc/sabnzbd
 mkdir /etc/sabnzbd/data
 chmod -R 755 /etc/sabnzbd
-sed -i "s/port = 8080/port = 3511/g" /etc/sabnzbd/data/sabnzbd.ini
-# sed -i "s/host = ::/host = 127.0.0.1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/url_base =.*/url_base = \/${password1}_nzb/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/host_whitelist =.*/host_whitelist = ${domain}/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/direct_unpack =.*/direct_unpack = 1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/new_nzb_on_failure =.*/new_nzb_on_failure = 1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/receive_threads =.*/receive_threads = ${cpu_thread_count}/g" /etc/sabnzbd/data/sabnzbd.ini
-
 
   cat > "/etc/pbh/docker-compose.yml" << EOF
 services:
@@ -142,6 +134,15 @@ echo 0
 fi
 
 cd /etc/pbh
+
+sed -i "s/port = 8080/port = 3511/g" /etc/sabnzbd/data/sabnzbd.ini
+# sed -i "s/host = ::/host = 127.0.0.1/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/url_base =.*/url_base = \/${password1}_nzb/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/host_whitelist =.*/host_whitelist = ${domain}/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/direct_unpack =.*/direct_unpack = 1/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/new_nzb_on_failure =.*/new_nzb_on_failure = 1/g" /etc/sabnzbd/data/sabnzbd.ini
+sed -i "s/receive_threads =.*/receive_threads = ${cpu_thread_count}/g" /etc/sabnzbd/data/sabnzbd.ini
+
 docker-compose restart
 
 cd $local_folder
