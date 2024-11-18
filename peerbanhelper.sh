@@ -64,7 +64,7 @@ services:
     volumes:
       - /etc/sabnzbd/data:/config
     ports:
-      - "127.0.0.1:3511:3511"
+      - "127.0.0.1:3511:8080"
     restart: always
   autoheal:
     image: willfarrell/autoheal
@@ -135,13 +135,22 @@ fi
 
 cd /etc/pbh
 
-sed -i "s/port = 8080/port = 3511/g" /etc/sabnzbd/data/sabnzbd.ini
-# sed -i "s/host = ::/host = 127.0.0.1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/url_base =.*/url_base = \/${password1}_nzb/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/host_whitelist =.*/host_whitelist = ${domain}/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/direct_unpack =.*/direct_unpack = 1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/new_nzb_on_failure =.*/new_nzb_on_failure = 1/g" /etc/sabnzbd/data/sabnzbd.ini
-sed -i "s/receive_threads =.*/receive_threads = ${cpu_thread_count}/g" /etc/sabnzbd/data/sabnzbd.ini
+while true; do
+  if [[ -z /etc/sabnzbd/data/sabnzbd.ini ]]; then
+  echo "wait config to init"
+  sleep 10
+  else
+  echo "configing"
+  # sed -i "s/port = 8080/port = 3511/g" /etc/sabnzbd/data/sabnzbd.ini
+  # sed -i "s/host = ::/host = 127.0.0.1/g" /etc/sabnzbd/data/sabnzbd.ini
+  sed -i "s/url_base =.*/url_base = \/${password1}_nzb/g" /etc/sabnzbd/data/sabnzbd.ini
+  sed -i "s/host_whitelist =.*/host_whitelist = ${domain}/g" /etc/sabnzbd/data/sabnzbd.ini
+  sed -i "s/direct_unpack =.*/direct_unpack = 1/g" /etc/sabnzbd/data/sabnzbd.ini
+  sed -i "s/new_nzb_on_failure =.*/new_nzb_on_failure = 1/g" /etc/sabnzbd/data/sabnzbd.ini
+  sed -i "s/receive_threads =.*/receive_threads = ${cpu_thread_count}/g" /etc/sabnzbd/data/sabnzbd.ini
+  break
+  fi
+done
 
 docker-compose restart
 
