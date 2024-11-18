@@ -16,11 +16,8 @@ apt-get install i2pd -y
 
 sed -i 's/false/true/g' /etc/i2pd/i2pd.conf
 
-cat /lib/systemd/system/i2pd.service | grep webroot
+sed -i "s/--service.*/--service --httpproxy.enabled=0 --socksproxy.enabled=0 --bandwidth=X --limits.transittunnels=100 --http.strictheaders=0 --http.webroot=\/${password1}_i2pd\//g" /lib/systemd/system/i2pd.service
 
-if [[ $? != 0 ]]; then
-sed -i "s/--service/--service --http.strictheaders=0 --http.webroot=\/${password1}_i2pd\//g" /lib/systemd/system/i2pd.service
-fi
 
 systemctl daemon-reload
 systemctl restart i2pd
