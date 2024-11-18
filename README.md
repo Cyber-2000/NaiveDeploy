@@ -24,9 +24,10 @@ Contains following system components:
 2. Alist 
 3. Qbittorrent[with Peerbanhelper(Docker version) && I2pd] 
 4. Aria2 
-5. Cloudflared DOH Client
-6. LibreSpeed
-7. BBR TCP Optimization
+5. Sabnzbd(Docker version)
+6. Cloudflared DOH Client
+7. LibreSpeed
+8. BBR TCP Optimization
 
 All in one script, no manual config required.
 
