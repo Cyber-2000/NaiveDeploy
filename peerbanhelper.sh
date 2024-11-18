@@ -48,6 +48,14 @@ services:
       #WEBPORT: 80
     ports:
       - "127.0.0.1:6666:80" # webport mapping (host:container)
+  autoheal:
+    image: willfarrell/autoheal
+    container_name: autoheal
+    restart: always
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   watchtower:
     image: containrrr/watchtower
     container_name: watchtower
