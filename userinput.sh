@@ -3,8 +3,12 @@
 set +e
 
 userinput_standard() {
-  
 
+ping baidu.com -c 4
+
+  if [[ $? != 0 ]]; then
+    TERM=ansi whiptail --title "GFW check fail" --msgbox "GFW check fail , be alert." 7 68
+  fi
   while [[ -z ${domain} ]]; do
     domain=$(whiptail --inputbox --nocancel "域名 Domain" 8 68 --title "域名设置" 3>&1 1>&2 2>&3)
     if whiptail --title "Domain check" --yesno "Confirm to use  ${domain}  ?" 8 78; then
