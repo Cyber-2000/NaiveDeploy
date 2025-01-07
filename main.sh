@@ -96,6 +96,27 @@ initialize() {
   sed -i "s/#ClientAliveInterval 0/ClientAliveInterval 60/g" /etc/ssh/sshd_config
   sed -i "s/#ClientAliveCountMax 3/ClientAliveCountMax 3/g" /etc/ssh/sshd_config
 
+if grep -q "DebianBanner" /etc/ssh/sshd_config; then
+    :
+else
+    #ssh-keygen -A
+    sed -i 's/#MaxAuthTries 6/MaxAuthTries 3/' /etc/ssh/sshd_config
+    #sed -i 's/^HostKey \/etc\/ssh\/ssh_host_\(dsa\|ecdsa\)_key$/\#HostKey \/etc\/ssh\/ssh_host_\1_key/g' /etc/ssh/sshd_config
+    #sed -i 's/#HostKey \/etc\/ssh\/ssh_host_ed25519_key/HostKey \/etc\/ssh\/ssh_host_ed25519_key/g' /etc/ssh/sshd_config
+    #sed -i 's/#TCPKeepAlive yes/TCPKeepAlive yes/' /etc/ssh/sshd_config
+    #sed -i 's/#PermitTunnel no/PermitTunnel no/' /etc/ssh/sshd_config
+    #sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/' /etc/ssh/sshd_config
+    #sed -i 's/#GatewayPorts no/GatewayPorts no/' /etc/ssh/sshd_config
+    #sed -i 's/#StrictModes yes/StrictModes yes/' /etc/ssh/sshd_config
+    #sed -i 's/#AllowAgentForwarding yes/AllowAgentForwarding no/' /etc/ssh/sshd_config
+    #sed -i 's/#AllowTcpForwarding yes/AllowTcpForwarding no/' /etc/ssh/sshd_config
+    echo "" >>/etc/ssh/sshd_config
+    #echo "Protocol 2" >> /etc/ssh/sshd_config
+    echo "DebianBanner no" >>/etc/ssh/sshd_config
+    #echo "AllowStreamLocalForwarding no" >> /etc/ssh/sshd_config
+    systemctl reload sshd
+fi
+
   systemctl reload sshd
 
   ## 阻止日志文件过大占用系统空间
@@ -131,23 +152,23 @@ initialize() {
 
   localip=$(ip -4 a | grep inet | grep "scope global" | awk '{print $2}' | cut -d'/' -f1 | head -n 1)
   myipv6=$(ip -6 a | grep inet6 | grep "scope global" | awk '{print $2}' | cut -d'/' -f1 | head -n 1)
-  myip="$(jq -r '.ip' "/root/.naive//ip.json")"
-  mycountry="$(jq -r '.country' "/root/.naive//ip.json")"
-  mycity="$(jq -r '.city' "/root/.naive//ip.json")"
+  # myip="$(jq -r '.ip' "/root/.naive//ip.json")"
+  # mycountry="$(jq -r '.country' "/root/.naive//ip.json")"
+  # mycity="$(jq -r '.city' "/root/.naive//ip.json")"
 
-  myip_org="$(jq -r '.org' "/root/.naive//ip.json")"
+  # myip_org="$(jq -r '.org' "/root/.naive//ip.json")"
 
-  IFS=' '
+  # IFS=' '
 
-  read -a strarr <<<"$myip_org"
+  # read -a strarr <<<"$myip_org"
 
-  org_temp="${strarr[1]}"
+  # org_temp="${strarr[1]}"
 
-  IFS=' '
+  # IFS=' '
 
-  read -a strarr2 <<<"$org_temp"
+  # read -a strarr2 <<<"$org_temp"
 
-  org="${strarr2[0]}"
+  # org="${strarr2[0]}"
 }
 
 install_base() {
@@ -160,8 +181,8 @@ install_base() {
 
 MasterMenu() {
     chattr -i -f /etc/resolv.conf
-    echo "nameserver 1.1.1.1" >/etc/resolv.conf
-    echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
+    # echo "nameserver 1.1.1.1" >/etc/resolv.conf
+    # echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
     cfdver1=$(curl -s "https://api.github.com/repos/cloudflare/cloudflared/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
     curl -LO https://github.com/cloudflare/cloudflared/releases/download/${cfdver1}/cloudflared-linux-amd64.deb
     dpkg -i cloudflared*.deb
@@ -205,14 +226,14 @@ EOF
     openfirewall
     source naive.sh
     install_naive
-    source docker.sh
-    install_docker
-    source peerbanhelper.sh
-    install_peerbanhelper
-    source aria2.sh
-    install_aria2
-    source qbt.sh
-    install_qbt
+    # source docker.sh
+    # install_docker
+    # source aria2.sh
+    # install_aria2
+    # source peerbanhelper.sh
+    # install_peerbanhelper
+    #source qbt.sh
+    #install_qbt
     source alist.sh
     install_alist
     apt-get install neofetch -y
@@ -226,8 +247,8 @@ EOF
 
 local_folder=$(pwd)
 
-mkdir /root/.naive/
-curl --ipv4 --retry 3 -s https://ipinfo.io?token=56c375418c62c9 --connect-timeout 5 &>/root/.naive/ip.json
+# mkdir /root/.naive/
+# curl --ipv4 --retry 3 -s https://ipinfo.io?token=56c375418c62c9 --connect-timeout 5 &>/root/.naive/ip.json
 initialize
 setlanguage
 MasterMenu
