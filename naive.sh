@@ -74,6 +74,7 @@ mkdir /etc/caddy/
                 hide_ip
                 hide_via
                 probe_resistance
+                dial_timeout     30
         }
 
         @host {
