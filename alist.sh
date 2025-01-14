@@ -13,6 +13,8 @@ systemctl enable alist
 
 sleep 10
 
+apt install jq -y
+
 cd /opt/alist/data
 cat config.json | jq '.scheme.address = "127.0.0.1"' &> tmp.json
 cp tmp.json config.json
