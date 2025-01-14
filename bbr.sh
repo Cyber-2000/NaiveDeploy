@@ -83,7 +83,7 @@ vm.swappiness = 1
 vm.overcommit_memory = 0
 kernel.pid_max=64000
 ## Enable bbr
-net.core.default_qdisc = cake
+net.core.default_qdisc = fq
 net.ipv4.tcp_congestion_control = bbr
 fs.inotify.max_user_instances=8192
 fs.inotify.max_user_watches=524288
