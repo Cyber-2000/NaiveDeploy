@@ -192,8 +192,8 @@ MasterMenu() {
     source bbr.sh
     install_bbr
     install_base
-    source firewall.sh
-    openfirewall
+    # source firewall.sh
+    # openfirewall
     source naive.sh
     install_naive
     # source docker.sh
