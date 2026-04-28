@@ -183,8 +183,8 @@ MasterMenu() {
     chattr -i -f /etc/resolv.conf
     # echo "nameserver 1.1.1.1" >/etc/resolv.conf
     # echo "nameserver 9.9.9.10" >>/etc/resolv.conf    
-    cfdver1=$(curl -s "https://api.github.com/repos/cloudflare/cloudflared/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-    curl -LO https://github.com/cloudflare/cloudflared/releases/download/${cfdver1}/cloudflared-linux-amd64.deb
+    # cfdver1=$(curl -s "https://api.github.com/repos/cloudflare/cloudflared/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    curl -LO https://github.com/cloudflare/cloudflared/releases/download/2026.3.0/cloudflared-linux-amd64.deb
     dpkg -i cloudflared*.deb
     rm cloudflared*.deb
   cat > '/etc/systemd/system/cloudflared-proxy-dns.service' << EOF
